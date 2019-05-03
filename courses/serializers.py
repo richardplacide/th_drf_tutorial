@@ -19,10 +19,20 @@ class ReviewSerializer(serializers.ModelSerializer):
         }
 
 class CourseSerializer(serializers.ModelSerializer):
+
+    # Option 1 : using HyperlinkedRelated fields creates a link to a list of reviews
+    # check issue with urls include & namespace
+    #reviews = serializers.HyperlinkedRelatedField(
+    #    many=True, read_only=True, view_name='apiv2:review-detail'
+    #)
+    # Option 2 :using ReviewSerializer as a field includes all reviews with each course 
+    reviews = ReviewSerializer(many=True, read_only=True)
+    
     class Meta:
         model = models.Course
         fields = (
             'id',
             'title',
-            'url'
+            'url',
+            'reviews'
         )

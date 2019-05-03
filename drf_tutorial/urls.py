@@ -20,6 +20,8 @@ from rest_framework import routers
 
 from courses import views
 
+app_name = "courses"
+
 router = routers.SimpleRouter()
 router.register(r'courses', views.CourseViewSet)
 router.register(r'reviews', views.ReviewViewSet)
